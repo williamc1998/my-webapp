@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href={% static "blog.css" %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700&family=Inter:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <p1> Welcome, {{user}} </p1>
+      <nav>
+        <li class="nav-item" style="float: right">
+          <a class="nav-link p-3 hover-underline-animation" href="{% url 'logout' %}" >Logout</a>
+        </li>
+      </nav>
+    </header>
+    <style> main::after {
+      position:absolute;
+      content: "";
+      background-color: white;
+      position: absolute;
+      top: 550;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      height:50vh
+    }</style>
+    <main style="padding-left:0;padding-right:0">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="hcoean" style="color:white;text-align:center">Goodbye spreadsheets!</h1>
+            <h2 style="color:white">The webapp designed to keep track of all investments in one place, with ease of use in mind. </h2>
+            <div style='padding:15px;height:100px;width:400px;display:flex;justify-content:center', class="arrow-container">
+              <a style='width:400px' class='nav-link' href="{% url 'portfolio' %}">
+                <div class="arrow"></div>
+                <div class="arrow-text" style="color:white">To portfolio</div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col">
+                <div class="first-welcome">
+                  <div data-tilt class="first-layer" style="position:relative;background-color:black;transform-style: preserve-3d;will-change:transform;transform:perspective(300px) rotateX(10.6deg) rotateY(9.36deg) scale2d(1,1,1);">
+                    <img src="{% static "images/table.png" %}" alt="home" height=256 width=270 style="border-radius: 3%;-webkit-transform: skewY(-10deg);-moz-transform: skewY(-10deg);background-color: #ddd;transform: translateZ(20px)"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class='container-fluid' style="background-color:white;margin-top:7vh;width:100%">
+          <div class="row" style="width:100%">
+            <div class="col-md-6" style="width:100%;justify-content:center">
+              <div class="first-welcome" style='margin-top:5vh;justify-content:center'>
+                <div data-tilt class="first-layer" style="position:relative;background-color:black;transform-style: preserve-3d;will-change:transform;transform:perspective(300px) rotateX(0.2) rotateY(9.36deg) scale2d(1,1,1);">
+                  <img src="{% static "images/news.png" %}" alt="home" height=256 width=270 style="border-radius: 3%;-webkit-transform: skewY(-10deg);-moz-transform: skewY(-10deg);background-color: #ddd;transform: translateZ(20px)"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" style="width:100%;margin-top:7vh">
+              <h1 class="hcoean" style="color:black;text-align:center">News links</h1>
+              <h2 style="color:black">Get the latest news for companies specific to what you hold. Simply add stocks to the portfolio providing transaction price.</h2>
+            </div>
+          </div>
+          <div class="row" style="width:100%;margin-top:12vh">
+            <div class="col-md-6" style="width:50%;justify-content:center;margin-top:5vh;padding-left:15vw">
+              <h1 class="hcoean" style="color:black;text-align:center">Insight</h1>
+              <h2 style="color:black">Get updated on your holdings and breakdowns every 15 seconds.</h2>
+            </div>
+            <div class="col-md-6" style="width:50%;float:right;padding-right:15vw">
+              <div class="first-welcome" style='margin-top:5vh;justify-content:center'>
+                <div data-tilt class="first-layer" style="position:relative;background-color:black;transform-style: preserve-3d;will-change:transform;transform:perspective(300px) rotateX(0.2) rotateY(9.36deg) scale2d(1,1,1);">
+                  <img src="{% static "images/pie.png" %}" alt="home" height=256 width=270 style="border-radius: 3%;-webkit-transform: skewY(-10deg);-moz-transform: skewY(-10deg);background-color: #ddd;transform: translateZ(20px)"/>
+                </div>
+              </div>
+              
+            </div> <div class="row" style="width:100%;margin-top:12vh">
+              <div class="col-md-6" style="width:1-0%;justify-content:center;margin-top:5vh;padding-left:15vw">
+                <h2 style="color:black">Built by yours truely using python,javascript,sqlite,css,html :] 
+                  -william
+                </h2>
+          </div>
+        </div>
+      </div>
+      </main>
+      
+        <footer>
+        </footer>
+        <script> $('.first-layer').tilt({
+          maxTilt: 20,
+          perspective: 1000,
+          easing: "cubic-bezier(.03,.98,.52,.99)",
+          speed: 1200,
+          glare: true,
+          maxGlare: 0.4,
+        });</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+    
+      </body>
+    </html>

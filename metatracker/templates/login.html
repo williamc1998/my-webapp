@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static "blog.css" %}>
+  </head>
+  <body>
+    <header>
+      <a class="nav-link p-3 hover-underline-animation" href="https://github.com/williamc1998/my-webapp/blob/main/README.md">This webapp is currently under development</a>
+      <nav>
+        <ul>
+
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <article>
+        <h1 class="hocean">Log in</h1>
+
+<div class="signup-form">
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="signup-form-group">
+      <label for="{{ form.username.id_for_label }}">Username:</label>
+      <div class="signup-form-group-inner">
+        {{ form.username }}
+        {% if form.username.errors %}
+          <ul class="errorlist">
+            {% for error in form.username.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <div class="signup-form-group">
+      <label for="{{ form.password.id_for_label }}">Password:</label>
+      <div class="signup-form-group-inner">
+        {{ form.password }}
+        {% if form.password.errors %}
+          <ul class="errorlist">
+            {% for error in form.password.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="form-button">Log in</button>
+            <div style='float:right;font-family:Arial'>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+          </div>
+          </form>
+      </article>
+    </main>
+    
+    <footer>
+      <p> 2023 Portfolio Tracker App</p>
+    </footer>
+    <script>
+      function redirect() {
+          window.location.href = "/portfolio/";
+      }
+  </script>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>My Blog</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700&family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href={% static "blog.css" %}>
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+  </head>
+  <body>
+    <header>
+      <p1> Welcome, {{user}} </p1>
+      <nav>
+        <a class="nav-link p-3 hover-underline-animation" href="https://github.com/williamc1998/my-webapp/blob/main/README.md">Roadmap</a>
+        <li class="nav-item" style="float: right">
+          <a class="nav-link p-3 hover-underline-animation" href="{% url 'logout' %}" >Logout</a> {% comment %}FIX THIS ISNT LOGGING OUT{% endcomment %}
+        </li>
+      </nav>
+    </header>
+    <main>
+      <div class='headmaster'>
+       <div class='headwrapper'>
+        
+        <h1 class="hocean">Portfolio Home</h1>
+        <h4 class="hoceanmini">Total value of portfolio: <span class="all_value">{{all_value}}</span></h4>
+        </div>
+
+        <div class="carousel-container" style='margin-left:16.6vw;margin-right:11.5vw;margin-top:15px' id='carousel-container'>
+          <div class="carousel-item" id="defaultearnings"> Add stocks for earnings dates </div>
+        </div>
+         <script>
+            var symbol_dates = {{ earnings_dates | safe }};
+            console.log(symbol_dates)
+            $.each(symbol_dates, function(symbol, date) {
+              var carousel_item = $("<div>").addClass("carousel-item").text(symbol + " - " + date);
+              $("#carousel-container").append(carousel_item);
+            });
+            $("#carousel-container script").remove();
+            $('#defaultearnings').remove();
+          </script>
+          
+       </div>
+       
+
+      <div class="top-container">
+        <div class="top-left">
+          <form method="post">
+            <div class="form-container">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ form.symbol.id_for_label }}">Symbol:</label>
+              <div class="form-group-inner">
+                {{ form.symbol }}
+                {% if form.symbol.errors %}
+                <ul class="errorlist">
+                  {% for error in form.symbol.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
+              <div class="form-group-inner input-group mb-3">
+                {{ form.quantity }}
+                {% if form.quantity.errors %}
+                <ul class="errorlist">
+                  {% for error in form.quantity.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.transaction_price.id_for_label }}">Price:</label>
+              <div class="form-group-inner">
+                {{ form.transaction_price }}
+                {% if form.transaction_price.errors %}
+                <ul class="errorlist">
+                  {% for error in form.transaction_price.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </div>
+            <div class="button-container">
+            <button type="submit" class="my-button">Confirm</button>
+          </div>
+          </form>
+        </div>
+        <div class="table-wrapper">
+        <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Units</th>
+              <th>Value</th>
+              <th>Current</th>
+              <th>Avg</th>
+              <th>Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for stock in stocks%}
+            <tr>
+              <td>{{stock.symbol}}</td>
+              <td>{{stock.quantity}}</td>
+              <td><div class="{{ stock.symbol }}">{{ stock.total_value }}</div></td>
+              <td><div class="{{stock.symbol}}updatedprice">{{stock.updated_price}}</div></td>
+              <td>{{stock.average_buy_price}}</td>
+              <td><span class="{{stock.symbol}}profit">{{stock.profit_value}}</span> (<span class="{{stock.symbol}}profitpercentage">{{stock.profit_percentage}}%)</span</td>
+            </tr>
+            {% endfor %}
+            {% comment %} <tr class = "active-row">
+              <td>Melissa</td>
+              <td>5150</td>
+            </tr> {% endcomment %}
+          </tbody>
+        </table>
+      </div>
+      </div>
+      
+      
+      
+      <script> $(document).ready(function(){
+        $('.carousel-container').slick({
+          rtl:false,
+          dots:true,
+          infinite:true,
+          slidesToShow:1,
+
+          arrows:true,
+          autoplay:true,
+          autoplaySpeed:7000
+        });
+      });
+    </script>
+
+
+      </div>
+        <div class="chart-container" id="chart-container">
+          <canvas id="myChart"></canvas>
+          
+        </div>
+        
+        <div class="newswrapper">
+          <h4 class="oceanmini" id="defaultnews"> Add stocks for news!</h4>
+          <div class="newstext" id='news'>
+            <script>
+              function showNews(data) {
+                var newsDiv = document.getElementById("news");
+                for (var symbol in data) {
+                  for (var i = 0; i < data[symbol].length; i++) {
+                    var headline = data[symbol][i][0];
+                    var url = data[symbol][i][1];
+                    var link = "<a href='" + url + "'>" + headline + "</a><br>";
+                    newsDiv.innerHTML += link;
+                  }
+                }
+              }
+              
+              var data = {{ news_object|safe }};
+              $('#defaultnews').text("Latest")
+              console.log(data);
+              showNews(data);
+            </script>
+          </div>
+        </div>
+      </div>
+
+  
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+      function hasDataToPlot() {
+        if (names.length > 0) {
+          // If there is data, return true
+          return true;
+        } else {
+          // If there is no data, return false
+          return false;
+        }
+      }
+    </script>
+
+    <div style="width: 300px;"><canvas id="acquisitions"></canvas></div>
+    {% comment %} <div class="carousel-container">
+      <div class="carousel-item"> my content </div>
+      <div class="carousel-item"> my content2 </div>
+      <div class="carousel-item"> my content3 </div>
+    </div> {% endcomment %}
+  </main>
+    <footer>
+      <p>
+        <button class='my-button' id="btnReset"> Reset</button>
+      <p>
+    </footer>
+    <script>
+      function hasDataToPlot(totalValues) {
+        if (totalValues.length > 0) {
+          // If there is data, return true
+          return true;
+        } else {
+          // If there is no data, return false
+          return false;
+        }
+      }
+    
+      const totalValues = [{{ total_vals|join:", " }}];
+      const names = ["{{ names|join:'", "' }}"];
+    
+      if (hasDataToPlot(totalValues)) {
+        document.getElementById("chart-container").style.display = 'flex';
+      } else {
+        document.getElementById('chart-container').style.display = 'none';
+      };
+      
+      const btnReset = document.getElementById("btnReset");
+      btnReset.addEventListener('click', async function() {
+        await fetch('http://127.0.0.1:8000/delete').then((data) => {
+          console.log(data);
+          if (hasDataToPlot(totalValues)) {
+            document.getElementById("chart-container").style.display = 'flex';
+          } else {
+            document.getElementById('chart-container').style.display = 'none';
+          };
+        });
+        location.reload();
+      });
+      const ctx = document.getElementById('myChart');
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: names,
+          datasets: [{
+            label: 'value in local currency',
+            data: totalValues,
+            borderWidth: 1,
+            hoverOffset: 8,
+            backgroundColor:['#f73dac','#b645a6','#8a4aa2','#5e61ad','#3f76bc','#fc9fd7','#E6F4F1']
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Holding makeup',
+              font:{family:'Inter',weight:500,size:26},
+              padding:{bottom:40},
+              color:'#fff'
+            },
+            legend: {
+              labels: {
+                color:'white'
+              }
+            }
+          }
+        }
+      });
+    </script>
+    
+    
+    
+    <script>
+      $(document).ready(function() {
+        let prevStockValues = {};
+        let prevStockPrices = {};
+        setInterval(function() {
+          $.ajax({
+            url: "{% url 'portfolio' %}",
+            success: function(data) {
+              
+              let prevTotalValue = data.all_value;
+              // Update the page with the new data
+              $(".all_value").text(data.all_value);
+              if (data.all_value > prevTotalValue) {
+                $(".all_value").removeClass('flash-red');
+                $(".all_value").addClass('underline-animation-green');
+              } else if (data.all_value < prevTotalValue) {
+                $(".all_value").removeClass('underline-animation-green');
+                $(".all_value").addClass('flash-red');
+              }
+
+              setTimeout(function() {
+                $(".all_value").removeClass('underline-animation-green');
+                $(".all_value").removeClass('flash-red');
+              }, 500); // remove the classes after 500 milliseconds (0.5 seconds)
+
+              for (let i = 0; i < data.stocks.length; i++) {
+                let stock = data.stocks[i];
+                let stockId = stock.symbol;
+                let stockProfitId = stock.symbol+'profit';
+                let stockProfitPercentageId = stock.symbol+'profitpercentage';
+                let stockPriceId = stock.symbol+'updatedprice';
+                let prevStockValue = prevStockValues[stockId] || 0;
+                let prevStockPrice = prevStockPrices[stockId] || 0;
+                let stockPrice = stock.updated_price.toFixed(2) || 0;
+                let stockValue = stock.total_value.toFixed(2) || 0;
+                let stockProfit = stock.profit_value.toFixed(2) || 0;
+                let stockProfitPercentage = stock.profit_percentage.toFixed(2) || 0;
+                $("." + stockProfitId).text(stockProfit);
+                $("." + stockProfitPercentageId).text(stockProfitPercentage);
+                $("." + stockId).text(stockValue);
+                $("." + stockPriceId).text(stockPrice);
+      
+                if (stockValue > prevStockValue) {
+                  $("." + stockId).removeClass('flash-red');
+                  $("." + stockId).addClass('flash-green');
+                } else if (stockValue < prevStockValue) {
+                  $("." + stockId).removeClass('flash-green');
+                  $("." + stockId).addClass('flash-red');
+                }
+                if (stockPrice > prevStockPrice) {
+                  $("." + stockPriceId).removeClass('flash-red');
+                  $("." + stockPriceId).addClass('flash-green');
+                } else if (stockPrice < prevStockPrice) {
+                  $("." + stockPriceId).removeClass('flash-green');
+                  $("." + stockPriceId).addClass('flash-red');
+                }
+      
+                prevStockValues[stockId] = stockValue;
+                prevStockPrices[stockPriceId] = stockPrice;
+                setTimeout(function() {
+                  $("."+stockId).removeClass('flash-green');
+                  $("."+stockId).removeClass('flash-red');
+                  $("."+stockPriceId).removeClass('flash-green');
+                  $("."+stockPriceId).removeClass('flash-red');
+                  
+                }, 500);
+              }
+            }
+          });
+        }, 
+        8000);
+      });
+    </script>
+  </body>
+</html>
