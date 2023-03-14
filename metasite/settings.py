@@ -29,11 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-DEBUG = True
+# DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1",'localhost','0.0.0.0:8080',
-                                          'lionfish-app-3pd9p.ondigitalocean.app','127.0.0.1:8000','0.0.0.0:8000']
+                                          'squid-app-layjd.ondigitalocean.app','127.0.0.1:8000','0.0.0.0:8000']
 CSRF_TRUSTED_ORIGINS = [
-    'https://lionfish-app-3pd9p.ondigitalocean.app'
+    'https://squid-app-layjd.ondigitalocean.app'
 ]
 # Application definition
 
@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'metasite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-DEVELOPMENT_MODE = True
+# DEVELOPMENT_MODE = True
 # if DEVELOPMENT_MODE is True:
 #     DATABASES = {
 #         "default": {
