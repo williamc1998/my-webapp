@@ -179,7 +179,7 @@ def get_news(request):
             continue
 
     master = defaultdict(list)
-    for i in range(6):
+    for i in range(4):
         choice_stock = random.choice(list(news_obj.keys()))
         choice_pair = random.choice(news_obj[choice_stock])
         master[choice_stock].append(choice_pair)

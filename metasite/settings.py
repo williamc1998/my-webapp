@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-# DEBUG = True
+
 ALLOWED_HOSTS = ["127.0.0.1",'localhost','0.0.0.0:8080',
                                           'squid-app-layjd.ondigitalocean.app','127.0.0.1:8000','0.0.0.0:8000']
 CSRF_TRUSTED_ORIGINS = [

@@ -53,8 +53,9 @@
        </div>
        
 
-      <div class="top-container">
-        <div class="top-left">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
           <form method="post">
             <div class="form-container">
             {% csrf_token %}
@@ -153,11 +154,12 @@
 
 
       </div>
+      <div class="col-md-4">
         <div class="chart-container" id="chart-container">
           <canvas id="myChart"></canvas>
-          
         </div>
-        
+        </div>
+        <div class="col-md-4">
         <div class="newswrapper">
           <h4 class="oceanmini" id="defaultnews"> Add stocks for news!</h4>
           <div class="newstext" id='news'>
