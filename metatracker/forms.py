@@ -4,9 +4,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 class StockForm(forms.Form):
-    symbol = forms.CharField(max_length=10,required=False)
-    quantity = forms.IntegerField(required=False)
-    transaction_price = forms.FloatField(required=False,widget=forms.TextInput())
+    symbol = forms.CharField(max_length=10)
+    quantity = forms.IntegerField(min_value=1)
+    transaction_price = forms.FloatField(min_value=0.001)
 
 
 class SignUpForm(UserCreationForm):

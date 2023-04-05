@@ -49,14 +49,14 @@
                     <label for="{{ form.symbol.id_for_label }}">Symbol:</label>
                     <div class="form-group-inner">
                       {{ form.symbol }}
-                      {% if form.symbol.errors %}
-                        <ul class="errorlist">
-                          {% for error in form.symbol.errors %}
-                            <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
                     </div>
+                    {% if form.symbol.errors %}
+    <ul class="errorlist">
+        {% for error in form.symbol.errors %}
+            <li><span class="error-message">required</span></li>
+        {% endfor %}
+    </ul>
+{% endif %}
                   </div>
                 </div>
                 <div class="col-md-4 text-center">
@@ -64,14 +64,14 @@
                     <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
                     <div class="form-group-inner input-group mb-3">
                       {{ form.quantity }}
-                      {% if form.quantity.errors %}
-                        <ul class="errorlist">
-                          {% for error in form.quantity.errors %}
-                            <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
                     </div>
+                    {% if form.symbol.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.symbol.errors %}
+                            <li><span class="error-message">required</span></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                   </div>
                 </div>
                 <div class="col-md-4">
@@ -79,23 +79,33 @@
                     <label for="{{ form.transaction_price.id_for_label }}">Price:</label>
                     <div class="form-group-inner">
                       {{ form.transaction_price }}
-                      {% if form.transaction_price.errors %}
-                        <ul class="errorlist">
-                          {% for error in form.transaction_price.errors %}
-                            <li>{{ error }}</li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
                     </div>
-          
+                    {% if form.symbol.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.symbol.errors %}
+                            <li><span class="error-message">required</span></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                   </div>
-                  <div class="button-container" syle="display:inline-block;margin-left:auto;">
-                    <button type="submit" class="my-button">Confirm</button>
-              </div>
                 </div>
               </div>
-              
-              
+              {% if request.GET.error_message %}
+              <div class="alert alert-danger" style='margin-top:5px;width:100%;display:inline-block'>{{ request.GET.error_message }}</div>
+          {% endif %}
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="button-container" syle="display:inline-block;margin-left:auto;">
+                    <button type="submit" class="my-button">Confirm</button>
+                  </div>
+                  {% if error_message %}
+{% endif %}
+ {% if form.error_message %}
+        <p>{{ form.error_message }}</p>
+    {% endif %}
+
+                </div>
+              </div>
             </form>
           </div>
           <div class="col-md-4 text-center">

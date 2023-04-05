@@ -106,7 +106,7 @@ def process_form(request):
         except:
             print('failed to grab price')
             failed = True
-            return HttpResponseRedirect('.')
+            return HttpResponseRedirect('/portfolio/?error_message=Failed to find stock! Ensure that the symbol is correct as per Yahoo')
         if failed == False:
             new_quantity=form.cleaned_data['quantity']
             new_buy_price=form.cleaned_data['transaction_price']

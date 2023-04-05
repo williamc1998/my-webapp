@@ -17,6 +17,24 @@ main {
 .signup-errorlist{
   color:red
 }
+.errorlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.errorlist li {
+  margin-top: 5px;
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+
 main2 {
   background-color: #FF3CAC;
   background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
