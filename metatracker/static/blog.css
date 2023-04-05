@@ -88,6 +88,7 @@ font-size: 16px;
 line-height: 150%;
 margin-top: 20px;
 text-align: center;
+line-height:5
 }
   h5,.h5 {
       font-family:Arial, Helvetica, sans-serif
@@ -194,7 +195,7 @@ text-align: center;
     font-weight: bold;
     margin-bottom: 0.5rem
   }
-  form{width:27%;margin-top:0px;
+  form{width:100%;margin-top:0px;
   }
 input {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -488,6 +489,7 @@ text {
     overflow: auto;
     margin-top: 8px;
     width: 100%;
+    padding-right:5px
   }
 
   .styled-table {
@@ -496,7 +498,8 @@ text {
     font-size: 0.9em;
     font-family: sans-serif;;
     display: inline-block;
-    width:100%
+    width:100%;
+    outline:none
 }
 .styled-table thead tr {
 
@@ -544,7 +547,7 @@ width:100%
 }
 
 .styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
+  /* border-bottom: 1px solid #dddddd; */
   color: white;
 }
 
@@ -566,11 +569,11 @@ backdrop-filter: saturate(150%) blur(10px);
 }   */
 .styled-table tbody tr.active-row {
   font-weight: bold;
-  color: #2071eb;
+  color: #242a34;
 }
 
 .styled-table thead tr:hover {
-  background-color: #1d70eb;
+  background-color: #212b39;
 }
 .styled-table tbody tr:hover {
   background-color: #a0a0a0;

@@ -29,26 +29,107 @@
       </nav>
     </header>
     <main>
-      <div class='headmaster'>
-       <div class='headwrapper'>
-        
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 "></div>
+            <div class="col-md-4 text-center">
         <h1 class="hocean">Portfolio Home</h1>
-        <h4 class="hoceanmini">Total value of portfolio: <span class="all_value">{{all_value}}</span></h4>
+            </div>
+          </div>
         </div>
-
-        <div class="carousel-container" style='margin-left:16.6vw;margin-right:11.5vw;margin-top:15px' id='carousel-container'>
-          <div class="carousel-item" id="defaultearnings"> Add stocks for earnings dates </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-md-4 text-center">
+            <form method="post" style="margin:auto;">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="{{ form.symbol.id_for_label }}">Symbol:</label>
+                    <div class="form-group-inner">
+                      {{ form.symbol }}
+                      {% if form.symbol.errors %}
+                        <ul class="errorlist">
+                          {% for error in form.symbol.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 text-center">
+                  <div class="form-group">
+                    <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
+                    <div class="form-group-inner input-group mb-3">
+                      {{ form.quantity }}
+                      {% if form.quantity.errors %}
+                        <ul class="errorlist">
+                          {% for error in form.quantity.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="{{ form.transaction_price.id_for_label }}">Price:</label>
+                    <div class="form-group-inner">
+                      {{ form.transaction_price }}
+                      {% if form.transaction_price.errors %}
+                        <ul class="errorlist">
+                          {% for error in form.transaction_price.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+          
+                  </div>
+                  <div class="button-container" syle="display:inline-block;margin-left:auto;">
+                    <button type="submit" class="my-button">Confirm</button>
+              </div>
+                </div>
+              </div>
+              
+              
+            </form>
+          </div>
+          <div class="col-md-4 text-center">
+            <h4 class="hoceanmini">Total value of portfolio: <span class="all_value">{{all_value}}</span></h4>
+          </div>
+          <div class="col-md-4">
+            <h4 class="oceanmini" style="text-align:center" >Earnings</h4>
+            <div class="carousel-container" id='carousel-container'>
+              <div class="carousel-item" id="defaultearnings"> Add stocks for earnings dates </div>
+            </div>
+          </div>
         </div>
-         <script>
-            var symbol_dates = {{ earnings_dates | safe }};
-            console.log(symbol_dates)
-            $.each(symbol_dates, function(symbol, date) {
-              var carousel_item = $("<div>").addClass("carousel-item").text(symbol + " - " + date);
-              $("#carousel-container").append(carousel_item);
-            });
-            $("#carousel-container script").remove();
-            $('#defaultearnings').remove();
-          </script>
+      </div>
+      
+      
+      
+      <script>
+        var symbol_dates = {{ earnings_dates | safe }};
+        console.log(symbol_dates)
+        var counter = 0;
+        $.each(symbol_dates, function(symbol, date) {
+          if (counter <= 2) { // Only append carousel items if counter is less than or equal to 2 (3 items)
+            var carousel_item = $("<div>").addClass("carousel-item").text(symbol + " - " + date);
+            $("#carousel-container").append(carousel_item);
+          }
+          counter++;
+        });
+        $("#carousel-container script").remove();
+        $('#defaultearnings').remove();
+      </script>
+      
+      
+      
+      
           
        </div>
        
@@ -56,54 +137,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
-          <form method="post">
-            <div class="form-container">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="{{ form.symbol.id_for_label }}">Symbol:</label>
-              <div class="form-group-inner">
-                {{ form.symbol }}
-                {% if form.symbol.errors %}
-                <ul class="errorlist">
-                  {% for error in form.symbol.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="{{ form.quantity.id_for_label }}">Quantity:</label>
-              <div class="form-group-inner input-group mb-3">
-                {{ form.quantity }}
-                {% if form.quantity.errors %}
-                <ul class="errorlist">
-                  {% for error in form.quantity.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="{{ form.transaction_price.id_for_label }}">Price:</label>
-              <div class="form-group-inner">
-                {{ form.transaction_price }}
-                {% if form.transaction_price.errors %}
-                <ul class="errorlist">
-                  {% for error in form.transaction_price.errors %}
-                  <li>{{ error }}</li>
-                  {% endfor %}
-                </ul>
-                {% endif %}
-              </div>
-            </div>
-            <div class="button-container">
-            <button type="submit" class="my-button">Confirm</button>
-          </div>
-          </form>
-        </div>
-        <div class="table-wrapper">
+          
+        <div class="table-wrapper" style="margin-top:10%;">
         <div class="table-container">
         <table class="styled-table">
           <thead>
@@ -135,24 +170,6 @@
         </table>
       </div>
       </div>
-      
-      
-      
-      <script> $(document).ready(function(){
-        $('.carousel-container').slick({
-          rtl:false,
-          dots:true,
-          infinite:true,
-          slidesToShow:1,
-
-          arrows:true,
-          autoplay:true,
-          autoplaySpeed:7000
-        });
-      });
-    </script>
-
-
       </div>
       <div class="col-md-4">
         <div class="chart-container" id="chart-container">
@@ -160,30 +177,34 @@
         </div>
         </div>
         <div class="col-md-4">
-        <div class="newswrapper">
-          <h4 class="oceanmini" id="defaultnews"> Add stocks for news!</h4>
-          <div class="newstext" id='news'>
-            <script>
-              function showNews(data) {
-                var newsDiv = document.getElementById("news");
-                for (var symbol in data) {
-                  for (var i = 0; i < data[symbol].length; i++) {
-                    var headline = data[symbol][i][0];
-                    var url = data[symbol][i][1];
-                    var link = "<a href='" + url + "'>" + headline + "</a><br>";
-                    newsDiv.innerHTML += link;
+          <div class="row">
+            <div class="newswrapper"style="overflow-y:auto;">
+              <h4 class="oceanmini"style="overflow-y:auto;" id="defaultnews"> Add stocks for news!</h4>
+              <div class="newstext" stlye="display: flex; flex-direction: column;overflow-y:auto;" id='news'>
+                <script>
+                  function showNews(data) {
+                    var newsDiv = document.getElementById("news");
+                    for (var symbol in data) {
+                      for (var i = 0; i < data[symbol].length; i++) {
+                        var headline = data[symbol][i][0];
+                        var url = data[symbol][i][1];
+                        var link = "<div class='news-item'><a href='" + url + "'>" + headline + "</a></div>";
+                        newsDiv.innerHTML += link;
+                      }
+                    }
                   }
-                }
-              }
-              
-              var data = {{ news_object|safe }};
-              $('#defaultnews').text("Latest")
-              console.log(data);
-              showNews(data);
-            </script>
+        
+                  var data = {{ news_object|safe }};
+                  $('#defaultnews').text("Latest")
+                  console.log(data);
+                  showNews(data);
+                </script>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        
+        
 
   
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -350,5 +371,28 @@
         8000);
       });
     </script>
+    <script> $(document).ready(function(){
+      $('.carousel-container').slick({
+        rtl:false,
+        dots:true,
+        infinite:true,
+        slidesToShow:1,
+
+        arrows:true,
+        autoplay:true,
+        autoplaySpeed:7000
+      });
+    });
+  </script>
+  <script>
+    var symbol_dates = {{ earnings_dates | safe }};
+    console.log(symbol_dates)
+    $.each(symbol_dates, function(symbol, date) {
+      var carousel_item = $("<div>").addClass("carousel-item").text(symbol + " - " + date);
+      $("#carousel-container").append(carousel_item);
+    });
+    $("#carousel-container script").remove();
+    $('#defaultearnings').remove();
+  </script>
   </body>
 </html>

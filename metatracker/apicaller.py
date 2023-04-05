@@ -68,6 +68,7 @@ def update(request):
     stocks = Stock.objects.filter(user=request.user)
     prices = {}
     all_value = 0
+    
     for i,stock in enumerate(stocks):
         share_price = price_grabber(stock.symbol)
         stock_value = round(stock.quantity * share_price,2)
@@ -97,6 +98,8 @@ def process_form(request):
     if form.is_valid():
         print('valid form')
         symbol=form.cleaned_data['symbol'].upper()
+        print(request.POST)
+        print('adding', symbol)
         try:
             price_grabber(symbol)
             failed = False
