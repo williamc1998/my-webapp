@@ -11,6 +11,12 @@ main {
   min-height: 100%;
   padding: 20px;
 }
+.error-message {
+  color: red;
+}
+.signup-errorlist{
+  color:red
+}
 main2 {
   background-color: #FF3CAC;
   background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
@@ -509,14 +515,14 @@ text {
   top: 0;
 background: rgba(0,0,0,0.8);
 z-index: 1;
-backdrop-filter: saturate(150%) blur(10px);
+backdrop-filter: saturate(15%) blur(10px);
 width:100%
 }
 
 
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
 .styled-table thead tr{
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.25); 
 }

@@ -5,6 +5,7 @@
     <title>Login</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href={% static "blog.css" %}>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
   <body>
     <header>
@@ -48,6 +49,24 @@
         {% endif %}
       </div>
     </div>
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field, errors in form.errors.items %}
+            <strong>{{ field|title }}</strong>
+            {% for error in errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
+    {% if form.non_field_errors %}
+    <ul class="errorlist">
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
     <input type="hidden" name="next" value="{{ next }}">
             <button type="submit" class="form-button">Log in</button>
             <div style='float:right;font-family:Arial'>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>

@@ -158,7 +158,7 @@ class LoginView(View):
 
             print('form not valid')
             print(form.errors)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,'errors':form.errors})
 
     def get_success_url(self):
         next_url = self.request.GET.get('next')
